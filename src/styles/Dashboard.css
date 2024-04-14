@@ -1,0 +1,174 @@
+.Header {
+  border-bottom: 1px solid rgb(232, 232, 232);
+}
+
+.Header--Content {
+  max-width: 1500px;
+  min-height: 4rem;
+
+  padding: 0 1rem;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.Header h1 {
+  color: var(--green-2);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.Header a:after {
+  display: block;
+  content: "";
+  border-bottom: solid 2px var(--green-3);
+  transform: scaleX(0);
+  transition: transform 250ms ease-in-out;
+}
+
+.Header a:hover:after {
+  transform: scaleX(1);
+}
+
+.Container--Dashboard {
+  margin: 2.5rem auto;
+  padding: 0 1.75rem;
+  max-width: 1500px;
+}
+
+.Container--Dashboard main {
+  height: 50vh;
+}
+
+.InfoValues form {
+  height: 18.75rem;
+  padding: 1.25rem 1rem;
+
+  border-radius: 0.25rem;
+  border: 1px solid var(--gray-1);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.InfoValues label {
+  font-size: 0.75rem;
+}
+
+.InfoValues input {
+  height: 1.5rem;
+  caret-color: var(--green-1);
+}
+
+.InfoValues select {
+  height: 3rem;
+}
+
+#InfoValues__Field--Value {
+  padding-right: 0.625rem;
+  border: 1px solid var(--gray-1);
+
+  border-radius: 0.5rem;
+  background-color: var(--gray-2);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#InfoValues__Field--Value input {
+  width: 100%;
+  border: none;
+  background-color: unset;
+}
+
+#InfoValues__Field--Value span {
+  color: var(--green-2);
+}
+
+.InfoValues input,
+.InfoValues select {
+  padding: 0.75rem 0.625rem;
+  background-color: var(--gray-2);
+
+  border-radius: 0.5rem;
+  border: 1px solid var(--gray-1);
+}
+
+.InfoValues button {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+
+  font-weight: 600;
+  color: var(--white);
+  background-color: var(--green-1);
+}
+
+.MuiGrid-root:first-child {
+  gap: 0.75rem;
+}
+
+.MuiGrid-root .MuiGrid-container > .MuiGrid-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.InfoValues--Box {
+  margin: 1rem 0;
+  padding: 1.25rem;
+
+  line-height: normal;
+  border: 1px solid var(--gray-1);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.InfoValues--Box h2 {
+  font-weight: 600;
+}
+
+.InfoValues--Box span {
+  color: var(--green-3);
+  font-size: 0.75rem;
+}
+
+.InfoValues--Box p {
+  color: var(--green-2);
+  font-weight: bold;
+}
+
+@media (min-width: 850px) {
+  .Header--Content {
+    padding: 0 3rem;
+  }
+
+  .Container--Dashboard {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    grid-gap: 2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .Container--Dashboard {
+    grid-template-columns: 30% 1fr;
+    grid-gap: 3rem;
+  }
+}
+
+/* @media (min-width: 1600px) {
+  .Container--Dashboard {
+    grid-template-columns: 25% 1fr;
+    grid-gap: 4rem;
+  }
+} */

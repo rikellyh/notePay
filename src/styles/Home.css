@@ -1,0 +1,51 @@
+.InitialScreen {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  gap: 1.5rem;
+  padding: 1.25rem;
+}
+
+.InitialScreen img {
+  max-width: 25rem;
+}
+
+.InitialScreen:has(h1):has(span) {
+  color: var(--brown);
+  text-align: center;
+}
+
+.InitialScreen h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.InitialScreen span {
+  width: 90%;
+  font-size: 1.125rem;
+  line-height: normal;
+}
+
+.InitialScreen span strong {
+  font-weight: bold;
+}
+
+.InitialScreen a {
+  height: 3rem;
+  width: 13rem;
+
+  padding: 1rem;
+  margin-top: 1rem;
+  background-color: transparent;
+
+  color: var(--green-3);
+  border: 2px solid var(--green-1);
+
+  border-radius: 0.75rem;
+  font-weight: 600;
+}
+
+.InitialScreen a:hover {
+  background-color: var(--green-hover-2);
+}
