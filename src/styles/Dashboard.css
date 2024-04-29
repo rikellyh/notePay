@@ -40,7 +40,20 @@
 }
 
 .Container--Dashboard main {
-  height: 50vh;
+  width: 100%;
+  min-height: 50vh;
+
+  margin: 50px auto;
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.Container--Dashboard main img {
+  max-width: 28rem;
 }
 
 .InfoValues form {
@@ -162,6 +175,10 @@
     grid-template-columns: 40% 1fr;
     grid-gap: 2rem;
   }
+
+  .Container--Dashboard main {
+    margin: 0 auto;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -170,10 +187,3 @@
     grid-gap: 3rem;
   }
 }
-
-/* @media (min-width: 1600px) {
-  .Container--Dashboard {
-    grid-template-columns: 25% 1fr;
-    grid-gap: 4rem;
-  }
-} */

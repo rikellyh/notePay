@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 import BgPerson from "../../assets/person.jpg";
-
 import "../../styles/Home.css";
 
 const Home = () => {
