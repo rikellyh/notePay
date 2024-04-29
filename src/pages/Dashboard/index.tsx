@@ -62,9 +62,8 @@ const Dashboard = () => {
                 <Grid item xs={12}>
                   <label htmlFor="description">Descrição</label>
                   <FieldTypeInput
-                    type="text"
                     placeholder="Digite aqui sua descrição"
-                    register={register("description")}
+                    {...register("description")}
                   />
                   <p className="errorMessage">{errors.description?.message}</p>
                 </Grid>
@@ -75,8 +74,8 @@ const Dashboard = () => {
                   <div id="InfoValues__Field--Value">
                     <FieldTypeInput
                       type="number"
-                      register={register("value")}
                       placeholder="1"
+                      {...register("value")}
                     />
                     <div>
                       <span>R$</span>
@@ -89,7 +88,7 @@ const Dashboard = () => {
                   <select {...register("typeValue")} id="typeValue">
                     <option value="">Selecione</option>
                     {typeValueArray.map((value, index) => (
-                      <option value={index} key={index}>
+                      <option value={value} key={index}>
                         {value}
                       </option>
                     ))}

@@ -1,18 +1,13 @@
-import { UseFormRegisterReturn } from "react-hook-form";
+import { InputHTMLAttributes, forwardRef } from "react";
 
-interface FieldTypeInputProps {
-  type: string;
-  placeholder: string;
-  register: UseFormRegisterReturn;
-}
+type InputProps = InputHTMLAttributes<HTMLInputElement>;
 
-export const FieldTypeInput = ({
-  type,
-  placeholder,
-  register,
-  ...props
-}: FieldTypeInputProps) => {
-  return (
-    <input type={type} placeholder={placeholder} {...register} {...props} />
-  );
-};
+export const FieldTypeInput = forwardRef<HTMLInputElement, InputProps>(
+  ({ name, type = "text", ...rest }, ref) => {
+    return (
+      <>
+        <input {...rest} type={type} name={name} ref={ref} />
+      </>
+    );
+  }
+);
