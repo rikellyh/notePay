@@ -52,6 +52,31 @@
   gap: 0.75rem;
 }
 
+.Container--Dashboard main .MuiTableBody-root td.MuiTableCell-root,
+.InfoValues--Box p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Container--Dashboard main .MuiTableBody-root td.MuiTableCell-root:first-child {
+  max-width: 10.5rem;
+}
+
+.Container--Dashboard
+  main
+  .MuiTableBody-root
+  td.MuiTableCell-root:nth-child(2) {
+  max-width: 5rem;
+}
+
+.Container--Dashboard
+  main
+  .MuiTableBody-root
+  td.MuiTableCell-root:nth-child(3) {
+  max-width: 5rem;
+}
+
 .Container--Dashboard main img {
   max-width: 28rem;
 }
@@ -161,6 +186,7 @@
 }
 
 .InfoValues--Box p {
+  max-width: 12rem;
   color: var(--green-2);
   font-weight: bold;
 }
