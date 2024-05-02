@@ -19,6 +19,7 @@ import { loadStoredFinances } from "../../utils/localStorage";
 
 import Header from "../../components/Header";
 import { FieldTypeInput } from "./components/FieldTypeInput";
+import { BoxInfoValues } from "./components/BoxInfoValues";
 
 import ImgNotResults from "../../assets/people.jpg";
 import "../../styles/Dashboard.css";
@@ -27,6 +28,21 @@ const Dashboard = () => {
   const [finances, setFinances] = useState<Finance[]>(loadStoredFinances());
 
   const typeValueArray = ["Entrada", "Saída"];
+
+  const totalValue = finances.reduce((accumulator, currentValue) => {
+    if (currentValue.typeValue === "Entrada") {
+      return accumulator + parseFloat(currentValue.value);
+    } else if (currentValue.typeValue === "Saída") {
+      return accumulator - parseFloat(currentValue.value);
+    } else {
+      return accumulator;
+    }
+  }, 0);
+
+  const formattedTotalValue = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(totalValue);
 
   const {
     register,
@@ -73,7 +89,7 @@ const Dashboard = () => {
                   <label htmlFor="value">Valor</label>
                   <div id="InfoValues__Field--Value">
                     <FieldTypeInput
-                      type="number"
+                      type="text"
                       placeholder="1"
                       {...register("value")}
                     />
@@ -100,15 +116,7 @@ const Dashboard = () => {
             <button type="submit">Inserir valor</button>
           </form>
           {finances && finances.length ? (
-            <div className="InfoValues--Box">
-              <div>
-                <h2>Valor total:</h2>
-                <span>O valor se refere ao saldo</span>
-              </div>
-              <div>
-                <p>R$1.000,00</p>
-              </div>
-            </div>
+            <BoxInfoValues sum={formattedTotalValue} />
           ) : (
             <></>
           )}
@@ -120,7 +128,7 @@ const Dashboard = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell>Descrição</TableCell>
-                    <TableCell>Valor</TableCell>
+                    <TableCell>Valor (R$)</TableCell>
                     <TableCell>Tipo</TableCell>
                     <TableCell></TableCell>
                   </TableRow>
