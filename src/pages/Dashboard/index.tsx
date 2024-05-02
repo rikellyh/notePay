@@ -3,8 +3,12 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { v4 as uuidV4 } from "uuid";
+
+import DeleteIcon from "@mui/icons-material/Delete";
+import CreateIcon from "@mui/icons-material/Create";
 import {
   Grid,
+  IconButton,
   Table,
   TableBody,
   TableCell,
@@ -61,6 +65,14 @@ const Dashboard = () => {
 
     setFinances([...finances, newItem]);
     reset();
+  };
+
+  const deleteFinance = (id: string) => {
+    const updatedFinances = finances.filter((item) => item.id !== id);
+
+    setFinances(updatedFinances);
+
+    localStorage.setItem("finance", JSON.stringify(updatedFinances));
   };
 
   useEffect(() => {
@@ -140,7 +152,21 @@ const Dashboard = () => {
                       <TableCell>{item.value}</TableCell>
                       <TableCell>{item.typeValue}</TableCell>
                       <TableCell>
-                        <button>a</button>
+                        <IconButton
+                          aria-label="delete"
+                          size="small"
+                          title="Deletar"
+                          onClick={() => item.id && deleteFinance(item.id)}
+                        >
+                          <DeleteIcon fontSize="inherit" />
+                        </IconButton>
+                        <IconButton
+                          aria-label="edit"
+                          size="small"
+                          title="Editar"
+                        >
+                          <CreateIcon fontSize="inherit" />
+                        </IconButton>
                       </TableCell>
                     </TableRow>
                   ))}
