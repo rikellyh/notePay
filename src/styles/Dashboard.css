@@ -52,6 +52,11 @@
   gap: 0.75rem;
 }
 
+.Container--Dashboard main .MuiTableHead-root th.MuiTableCell-root {
+  font-weight: bold;
+  background-color: var(--green-hover-3);
+}
+
 .Container--Dashboard main .MuiTableHead-root th.MuiTableCell-root:last-child {
   width: 50%;
 }
@@ -119,7 +124,13 @@
 }
 
 .InfoValues select {
-  height: 3rem;
+  height: 100%;
+}
+
+.InfoValues.ModalEditFinance form {
+  padding: 0;
+  border: none;
+  height: 16.5rem;
 }
 
 #InfoValues__Field--Value {
@@ -168,8 +179,12 @@
   color: var(--red);
 }
 
-.MuiGrid-root:first-child {
+.FormGrid--Container {
   gap: 0.75rem;
+}
+
+.FormGrid--Container.ModalEditFinance {
+  gap: 1.25rem;
 }
 
 .MuiGrid-root .MuiGrid-container > .MuiGrid-item {
@@ -203,6 +218,12 @@
   max-width: 12rem;
   color: var(--green-2);
   font-weight: bold;
+}
+
+.Btn--Close {
+  position: absolute;
+  right: 3px;
+  top: 3px;
 }
 
 @media (min-width: 850px) {

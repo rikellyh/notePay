@@ -24,12 +24,15 @@ import { loadStoredFinances } from "../../utils/localStorage";
 import Header from "../../components/Header";
 import { FieldTypeInput } from "./components/FieldTypeInput";
 import { BoxInfoValues } from "./components/BoxInfoValues";
+import { ModalEditFinance } from "./components/ModalEditFinance";
 
 import ImgNotResults from "../../assets/people.jpg";
 import "../../styles/Dashboard.css";
 
 const Dashboard = () => {
   const [finances, setFinances] = useState<Finance[]>(loadStoredFinances());
+  const [selectedFinance, setSelectedFinance] = useState<Finance | null>(null);
+  const [open, setOpen] = useState(false);
 
   const typeValueArray = ["Entrada", "Saída"];
 
@@ -57,6 +60,16 @@ const Dashboard = () => {
     resolver: yupResolver(CreateTypeValueSchema),
   });
 
+  const handleOpen = (id: string) => {
+    const finance = getFinanceById(id);
+
+    if (finance) {
+      setOpen(true);
+      setSelectedFinance(finance);
+    }
+  };
+  const handleClose = () => setOpen(false);
+
   const addFinance = (item: Finance) => {
     const newItem = {
       id: uuidV4(),
@@ -75,6 +88,25 @@ const Dashboard = () => {
     localStorage.setItem("finance", JSON.stringify(updatedFinances));
   };
 
+  const getFinanceById = (id: string) => {
+    return finances.find((item) => item.id === id);
+  };
+
+  const updateFinance = (id: string, updatedItem: Partial<Finance>) => {
+    const updatedFinances = finances.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          ...updatedItem,
+        };
+      }
+      return item;
+    });
+
+    setFinances(updatedFinances);
+    localStorage.setItem("finance", JSON.stringify(updatedFinances));
+  };
+
   useEffect(() => {
     localStorage.setItem("finance", JSON.stringify(finances));
   }, [finances]);
@@ -82,10 +114,17 @@ const Dashboard = () => {
   return (
     <>
       <Header />
+      <ModalEditFinance
+        open={open}
+        handleClose={handleClose}
+        typeValueArray={typeValueArray}
+        selectedFinance={selectedFinance}
+        updateFinance={updateFinance}
+      />
       <section className="Container--Dashboard">
         <div className="InfoValues">
           <form onSubmit={handleSubmit(addFinance)}>
-            <Grid container>
+            <Grid className="FormGrid--Container" container>
               <Grid container item spacing={1}>
                 <Grid item xs={12}>
                   <label htmlFor="description">Descrição</label>
@@ -164,6 +203,7 @@ const Dashboard = () => {
                           aria-label="edit"
                           size="small"
                           title="Editar"
+                          onClick={() => item.id && handleOpen(item.id)}
                         >
                           <CreateIcon fontSize="inherit" />
                         </IconButton>
