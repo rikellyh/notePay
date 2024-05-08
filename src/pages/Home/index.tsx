@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 
+import { usePageTransition } from "../../hooks/useTransitionPage";
+
 import BgPerson from "../../assets/person.jpg";
 import "../../styles/Home.css";
 
 const Home = () => {
+  const { fadeOut } = usePageTransition();
+
   return (
     <>
-      <section className="InitialScreen">
+      <section className={`InitialScreen ${fadeOut ? "fade-out" : "fade-in"}`}>
         <img
           src={BgPerson}
           alt="Ilustração de uma mulher administrando suas finanças"

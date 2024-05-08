@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 
+import { usePageTransition } from "../../hooks/useTransitionPage";
+
 const Header = () => {
+  const { fadeOut } = usePageTransition();
+
   return (
     <>
-      <header className="Header">
+      <header className={`Header ${fadeOut ? "fade-out" : "fade-in"}`}>
         <div className="Header--Content">
           <div>
             <h1>NotePay</h1>

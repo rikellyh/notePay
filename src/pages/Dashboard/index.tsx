@@ -20,6 +20,7 @@ import {
 import { Finance } from "../../types/finance";
 import { CreateTypeValueSchema } from "../../schemas";
 import { loadStoredFinances } from "../../utils/localStorage";
+import { usePageTransition } from "../../hooks/useTransitionPage";
 
 import Header from "../../components/Header";
 import { FieldTypeInput } from "./components/FieldTypeInput";
@@ -33,6 +34,8 @@ const Dashboard = () => {
   const [finances, setFinances] = useState<Finance[]>(loadStoredFinances());
   const [selectedFinance, setSelectedFinance] = useState<Finance | null>(null);
   const [open, setOpen] = useState(false);
+
+  const { fadeOut } = usePageTransition();
 
   const typeValueArray = ["Entrada", "Saída"];
 
@@ -121,7 +124,9 @@ const Dashboard = () => {
         selectedFinance={selectedFinance}
         updateFinance={updateFinance}
       />
-      <section className="Container--Dashboard">
+      <section
+        className={`Container--Dashboard ${fadeOut ? "fade-out" : "fade-in"}`}
+      >
         <div className="InfoValues">
           <form onSubmit={handleSubmit(addFinance)}>
             <Grid className="FormGrid--Container" container>
