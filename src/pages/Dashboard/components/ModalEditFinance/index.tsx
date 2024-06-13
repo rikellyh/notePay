@@ -10,7 +10,7 @@ import { FieldTypeInput } from "../FieldTypeInput";
 
 interface ModalEditFinanceProps {
   open: boolean;
-  handleClose: () => void;
+  handleCloseModalEdit: () => void;
   typeValueArray: string[];
   selectedFinance: Finance | null;
   updateFinance: (id: string, updatedItem: Finance) => void;
@@ -18,7 +18,7 @@ interface ModalEditFinanceProps {
 
 export const ModalEditFinance = ({
   open,
-  handleClose,
+  handleCloseModalEdit,
   typeValueArray,
   selectedFinance,
   updateFinance,
@@ -51,21 +51,21 @@ export const ModalEditFinance = ({
   const onSubmit = (data: Finance) => {
     if (financeId && selectedFinance) {
       updateFinance(financeId, data);
-      handleClose();
+      handleCloseModalEdit();
       reset();
     }
   };
 
   return (
     <div>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={open} onClose={handleCloseModalEdit}>
         <Box sx={style}>
           <div className="Btn--Close">
             <IconButton
               aria-label="edit"
               size="medium"
               title="Fechar"
-              onClick={handleClose}
+              onClick={handleCloseModalEdit}
               style={{ backgroundColor: "transparent" }}
             >
               <CloseIcon fontSize="inherit" />

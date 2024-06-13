@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { v4 as uuidV4 } from "uuid";
 
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CreateIcon from "@mui/icons-material/Create";
 import {
@@ -29,11 +30,13 @@ import { ModalEditFinance } from "./components/ModalEditFinance";
 
 import ImgNotResults from "../../assets/people.jpg";
 import "../../styles/Dashboard.css";
+import { ModalDeleteFinances } from "./components/ModalDeleteFinances";
 
 const Dashboard = () => {
   const [finances, setFinances] = useState<Finance[]>(loadStoredFinances());
   const [selectedFinance, setSelectedFinance] = useState<Finance | null>(null);
-  const [open, setOpen] = useState(false);
+  const [openModalEdit, setOpenModalEdit] = useState(false);
+  const [openModalDelete, setOpenModalDelete] = useState(false);
 
   const { fadeOut } = usePageTransition();
 
@@ -63,15 +66,18 @@ const Dashboard = () => {
     resolver: yupResolver(CreateTypeValueSchema),
   });
 
-  const handleOpen = (id: string) => {
+  const handleOpenModalEdit = (id: string) => {
     const finance = getFinanceById(id);
 
     if (finance) {
-      setOpen(true);
+      setOpenModalEdit(true);
       setSelectedFinance(finance);
     }
   };
-  const handleClose = () => setOpen(false);
+  const handleCloseModalEdit = () => setOpenModalEdit(false);
+
+  const handleOpenModalDelete = () => setOpenModalDelete(true);
+  const handleCloseModalDelete = () => setOpenModalDelete(false);
 
   const addFinance = (item: Finance) => {
     const newItem = {
@@ -89,6 +95,12 @@ const Dashboard = () => {
     setFinances(updatedFinances);
 
     localStorage.setItem("finance", JSON.stringify(updatedFinances));
+  };
+
+  const deleteAllFinances = () => {
+    setFinances([]);
+    localStorage.removeItem("finance");
+    handleCloseModalDelete();
   };
 
   const getFinanceById = (id: string) => {
@@ -118,11 +130,16 @@ const Dashboard = () => {
     <>
       <Header />
       <ModalEditFinance
-        open={open}
-        handleClose={handleClose}
+        open={openModalEdit}
+        handleCloseModalEdit={handleCloseModalEdit}
         typeValueArray={typeValueArray}
         selectedFinance={selectedFinance}
         updateFinance={updateFinance}
+      />
+      <ModalDeleteFinances
+        open={openModalDelete}
+        handleCloseModalDelete={handleCloseModalDelete}
+        deleteAllFinances={deleteAllFinances}
       />
       <section
         className={`Container--Dashboard ${fadeOut ? "fade-out" : "fade-in"}`}
@@ -186,7 +203,16 @@ const Dashboard = () => {
                     <TableCell>Descrição</TableCell>
                     <TableCell>Valor (R$)</TableCell>
                     <TableCell>Tipo</TableCell>
-                    <TableCell></TableCell>
+                    <TableCell>
+                      <button
+                        type="button"
+                        onClick={handleOpenModalDelete}
+                        className="Btn--Clear__All"
+                      >
+                        <CancelOutlinedIcon sx={{ fontSize: "1rem" }} />
+                        Limpar
+                      </button>
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -208,7 +234,9 @@ const Dashboard = () => {
                           aria-label="edit"
                           size="small"
                           title="Editar"
-                          onClick={() => item.id && handleOpen(item.id)}
+                          onClick={() =>
+                            item.id && handleOpenModalEdit(item.id)
+                          }
                         >
                           <CreateIcon fontSize="inherit" />
                         </IconButton>
