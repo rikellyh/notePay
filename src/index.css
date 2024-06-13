@@ -129,6 +129,11 @@ nav,
 section {
   display: block;
 }
+body,
+html,
+div#root {
+  height: 100%;
+}
 body {
   overflow: auto;
   line-height: 1;
