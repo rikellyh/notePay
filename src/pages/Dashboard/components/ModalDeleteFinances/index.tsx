@@ -19,6 +19,7 @@ export const ModalDeleteFinances = ({
     transform: "translate(-50%, -50%)",
     maxWidth: 450,
     width: "95%",
+    height: "12.5rem",
     bgcolor: "background.paper",
     boxShadow: 24,
     p: 4,
@@ -42,15 +43,15 @@ export const ModalDeleteFinances = ({
             </IconButton>
           </div>
           <div className="ModalDeleteFinances">
-            <h1>
-              Deseja <strong>apagar</strong> todos os itens da tabela?
-            </h1>
-            <button type="button" onClick={deleteAllFinances}>
-              SIM
-            </button>
-            <button type="button" onClick={handleCloseModalDelete}>
-              NÃO
-            </button>
+            <h1>Deseja apagar todos os itens da tabela?</h1>
+            <div>
+              <button type="button" onClick={handleCloseModalDelete}>
+                NÃO
+              </button>
+              <button type="button" onClick={deleteAllFinances}>
+                SIM
+              </button>
+            </div>
           </div>
         </Box>
       </Modal>
