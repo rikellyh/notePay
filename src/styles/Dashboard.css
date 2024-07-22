@@ -131,6 +131,7 @@
 }
 
 .InfoValues select {
+  max-height: 3.125rem;
   height: 100%;
 }
 

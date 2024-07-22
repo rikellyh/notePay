@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import CloseIcon from "@mui/icons-material/Close";
 import { Box, Grid, IconButton, Modal } from "@mui/material";
 import { useForm } from "react-hook-form";
@@ -52,9 +54,14 @@ export const ModalEditFinance = ({
     if (financeId && selectedFinance) {
       updateFinance(financeId, data);
       handleCloseModalEdit();
-      reset();
     }
   };
+
+  useEffect(() => {
+    if (open && selectedFinance) {
+      reset(selectedFinance);
+    }
+  }, [open, selectedFinance, reset]);
 
   return (
     <div>
