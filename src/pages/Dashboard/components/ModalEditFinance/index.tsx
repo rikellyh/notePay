@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Finance } from "../../../../types/finance";
 import { CreateTypeValueSchema } from "../../../../schemas";
+import { styleModalEditFinance } from "../../../../utils/styleModal";
 
 import { FieldTypeInput } from "../FieldTypeInput";
 
@@ -25,20 +26,6 @@ export const ModalEditFinance = ({
   selectedFinance,
   updateFinance,
 }: ModalEditFinanceProps) => {
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    maxWidth: 450,
-    width: "95%",
-    bgcolor: "background.paper",
-    boxShadow: 24,
-    p: 4,
-    outline: "none",
-    borderRadius: "0.5rem",
-  };
-
   const {
     register,
     handleSubmit,
@@ -66,7 +53,7 @@ export const ModalEditFinance = ({
   return (
     <div>
       <Modal open={open} onClose={handleCloseModalEdit}>
-        <Box sx={style}>
+        <Box sx={styleModalEditFinance}>
           <div className="Btn--Close">
             <IconButton
               aria-label="edit"

@@ -20,17 +20,18 @@ import {
 
 import { Finance } from "../../types/finance";
 import { CreateTypeValueSchema } from "../../schemas";
-import { loadStoredFinances } from "../../utils/localStorage";
 import { usePageTransition } from "../../hooks/useTransitionPage";
+import { loadStoredFinances } from "../../utils/localStorage";
+import { formatCurrency } from "../../utils/formatTotalValue";
 
 import Header from "../../components/Header";
 import { FieldTypeInput } from "./components/FieldTypeInput";
 import { BoxInfoValues } from "./components/BoxInfoValues";
 import { ModalEditFinance } from "./components/ModalEditFinance";
+import { ModalDeleteFinances } from "./components/ModalDeleteFinances";
 
 import ImgNotResults from "../../assets/people.jpg";
 import "../../styles/Dashboard.css";
-import { ModalDeleteFinances } from "./components/ModalDeleteFinances";
 
 const Dashboard = () => {
   const [finances, setFinances] = useState<Finance[]>(loadStoredFinances());
@@ -39,23 +40,8 @@ const Dashboard = () => {
   const [openModalDelete, setOpenModalDelete] = useState(false);
 
   const { fadeOut } = usePageTransition();
-
+  const totalValueFormatted = formatCurrency(finances);
   const typeValueArray = ["Entrada", "Saída"];
-
-  const totalValue = finances.reduce((accumulator, currentValue) => {
-    if (currentValue.typeValue === "Entrada") {
-      return accumulator + parseFloat(currentValue.value);
-    } else if (currentValue.typeValue === "Saída") {
-      return accumulator - parseFloat(currentValue.value);
-    } else {
-      return accumulator;
-    }
-  }, 0);
-
-  const formattedTotalValue = new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  }).format(totalValue);
 
   const {
     register,
@@ -189,7 +175,7 @@ const Dashboard = () => {
             <button type="submit">Inserir valor</button>
           </form>
           {finances && finances.length ? (
-            <BoxInfoValues sum={formattedTotalValue} />
+            <BoxInfoValues sum={totalValueFormatted} />
           ) : (
             <></>
           )}
