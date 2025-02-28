@@ -283,6 +283,12 @@
   top: 3px;
 }
 
+.Sort--Value__Btn {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 @media (min-width: 850px) {
   .Header--Content {
     padding: 0 3rem;
